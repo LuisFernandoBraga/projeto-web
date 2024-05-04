@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h2 style="text-align: center";>Cadastro</h2>  
+<hr>
+<form action="{{url_for('cria_cadastro')}}" method="POST" class="form-control">
+
+        <label>Nome</label> <br>
+        <input type="text" name= nome class="form-control" id="examploNomeInput" 
+        placeholder="Digite o nome: " required> <br>
+
+        <label>Contato</label> <br>
+        <input type="text" name= contato class="form-control" id="examploContatoInput" 
+        placeholder="Digite o contato do cliente: " required> <br>
+
+        <label>Descrição Serviço</label> <br>
+        <input type="text" name= descricao class="form-control" id="examploDescricaoInput" 
+        placeholder="Selecione  o tipo de serviço solicitado: " required> <br>
+
+        <label for="dataHora">Data e Hora:</label>
+        <input type="datetime-local" id="dataHora" name="data_hora" class="form-control" required><br>
+
+        <label>Valor Serviço</label> <br>
+        <input type="text" name= valor class="form-control" id="examploValorInput" 
+        placeholder="Selecione o valor do serviço: " required> <br>
+
+    <button class="btn btn-primary">Adicionar</button>
+</form>
+{% endblock conteudo %}

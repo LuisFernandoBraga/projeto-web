@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<h2 style="text-align: center";>Atualizar Cadastro</h2>  
+<hr>
+<form action="{{url_for('atualizar_cadastro', id=atualiza.id)}}" method="POST" class="form-control">
+        <label>Nome</label> <br>
+        <input type="text" name= nome value="{{atualiza.nome}}" class="form-control" id="examploNomeInput"><br>
+
+        <label>Contato</label> <br>
+        <input type="text" name= contato value="{{atualiza.contato}}" class="form-control" id="examploContatoInput"> 
+        <br>
+
+        <label>Descrição Serviço</label> <br>
+        <input type="text" name= descricao value="{{atualiza.descricao}}" class="form-control" id="examploDescricaoInput" ><br>
+
+        <label for="dataHora">Data e Hora:</label>
+        <input type="datetime-local" id="dataHora" name="data_hora" value="{{atualiza.data_hora}}" class="form-control"><br>
+
+        <label>Valor Serviço</label> <br>
+        <input type="text" name= valor value="{{atualiza.valor}}" class="form-control" id="examploValorInput"><br>
+
+    <button class="btn btn-primary">Atualizar</button>
+</form>
+{% endblock conteudo %}
