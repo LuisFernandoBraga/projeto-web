@@ -1,8 +1,8 @@
 """bibliotecas importadas"""
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-#from datetime import date, time, datetime, timedelta
 
+#SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 site = Flask(__name__)
 
