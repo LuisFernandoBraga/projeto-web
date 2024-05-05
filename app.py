@@ -4,15 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 
 #SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-site = Flask(__name__)
+app = Flask(__name__)
 
 """configuração banco de dados sqlite"""
-site.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///agenda.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///agenda.sqlite3"
 
-db = SQLAlchemy(site)
+db = SQLAlchemy(app)
 
 #comando para funcionamento do create_all
-site.app_context().push()
+app.app_context().push()
 
 """estrutura banco de dados"""
 class agenda(db.Model):
@@ -31,15 +31,15 @@ class agenda(db.Model):
         self.valor = valor
 
 """rotas para as páginas"""
-@site.route('/')
+@app.route('/')
 def principal():
     return render_template("index.html")
 
-@site.route('/area_do_profissional', methods=["GET", "POST"])
+@app.route('/area_do_profissional', methods=["GET", "POST"])
 def agendamento():
     return render_template("area_do_profissional.html", agenda=agenda.query.all())
 
-@site.route('/inserir_cadastro', methods=["GET", "POST"])
+@app.route('/inserir_cadastro', methods=["GET", "POST"])
 def cria_cadastro():
     nome = request.form.get('nome')
     contato = request.form.get('contato')
@@ -54,7 +54,7 @@ def cria_cadastro():
         return redirect(url_for('agendamento'))   
     return render_template("inserir_cadastro.html")
 
-@site.route('/<int:id>/atualizar_cadastro', methods=["GET", "POST"])
+@app.route('/<int:id>/atualizar_cadastro', methods=["GET", "POST"])
 def atualizar_cadastro(id):
     atualiza = agenda.query.filter_by(id=id).first()
     if request.method == 'POST':
@@ -69,7 +69,7 @@ def atualizar_cadastro(id):
         return redirect(url_for('agendamento'))
     return render_template("atualizar_cadastro.html", atualiza=atualiza)
 
-@site.route('/<int:id>/excluir_cadastro', methods=["GET", "POST"])
+@app.route('/<int:id>/excluir_cadastro', methods=["GET", "POST"])
 def excluir_cadastro(id):
     atualiza = agenda.query.filter_by(id=id).first()
     db.session.delete(atualiza)
@@ -81,4 +81,4 @@ def excluir_cadastro(id):
 #with site.app_context():
 if __name__ == "__main__":
     db.create_all()
-    site.run(debug=True)
+    app.run(debug=True)
